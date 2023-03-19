@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <style>
+  *{
+    box-sizing: border-box;
+  }
+  body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+ .main-div{
+    width: 50%;
+    border: 1px solid deepskyblue;
+    box-sizing: border-box;
+    padding: 30px;
+    border-radius: 5px;
+  }
+  .btn-div{
+    text-align: center;
+  }
+ .time-div{
+   text-align: center;
+   margin-bottom: 30px;
+ }
+ span{
+   font-size: 20px;
+ }
+ button{
+  background-color: deepskyblue;
+   border: none;
+   outline: none;
+   padding: 10px;
+   border-radius: 7px;
+   color: white;
+   margin-bottom: 10px;
+   cursor: pointer;
+   width: 70%;
+ }
+ button:hover{
+   background-color: rgb(43, 152, 196);
+ }
+span:last-child{
+  background-color: rgb(226, 212, 20);
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: 20px;
+ }
+ h2{
+  margin-bottom: 30px;
+  text-align: center;
+  color: rgb(236, 113, 12);
+  text-shadow: 1px 1px 1px rgb(12, 11, 11);
+  text-transform: uppercase;
+ }
+  </style>
+</head>
+
+<body>
+  <div class="main-div">
+    <h2>Stop Watch</h2>
+    <div class="time-div">
+      <span id="hour">00</span><span id="min"> : 00</span><span id="sec"> : 00</span><span id="milsec">00</span>
+    </div>
+   <div class="btn-div">
+     <button type="submit" onclick="start()" >Start</button>
+     <button type="submit" onclick="stop()">STOP</button>
+     <button type="submit" onclick="relode()">Relode</button>
+   </div>
+  </div>
+  
+  
+  <script>
+  var counter = 0;
+  var sec = 0;
+  var min = 0;
+  var hour = 0;
+  var intervalid;
+
+  let miltime = document.getElementById("milsec");
+  let sectime = document.getElementById("sec");
+  let mintime = document.getElementById("min");
+  let hourtime = document.getElementById("hour");
+  function work(){
+    counter++;
+    if(counter<10){
+      miltime.innerHTML= "0"+ counter;
+    }
+    else if(counter>99){
+      counter=0;
+      miltime.innerHTML= "0"+counter;
+      sec++;
+      if(sec<10){
+        sectime.innerHTML=" : 0"+sec;
+      }
+      else if(sec>59){
+        sec=0;
+        sectime.innerHTML=" : 0"+sec;
+        min++
+        if(min<10){
+          mintime.innerHTML=" : 0"+min;
+        }
+        else if(min>59){
+          min = 0;
+          mintime.innerHTML=" : 0"+min;
+          hour++;
+          if(hour<10){
+            hourtime.innerHTML="0"+hour;
+          }
+          else if(hour>59){
+            hour=0;
+            hourtime.innerHTML=hour;
+          }else{
+            hourtime.innerHTML=hour;
+          }
+        }else{
+          mintime.innerHTML=" : "+min;
+        }
+      }else{
+        sectime.innerHTML=" : "+sec;
+      }
+    }
+    else{
+      miltime.innerHTML= ""+counter
+    }
+  }
+  
+  
+  function start(){
+    intervalid = setInterval(work,10);
+  }
+  
+  
+  function stop(){
+    clearInterval(intervalid);
+  }
+  
+  function relode(){
+    clearInterval(intervalid)
+    counter=0;
+    sec=0;
+    min=0
+    hour=0;
+    miltime.innerHTML= "0"+counter;
+    sectime.innerHTML=" : 0"+sec;
+    mintime.innerHTML=" : 0"+min;
+    hourtime.innerHTML= "0"+hour;
+  }
+    
+  </script>
+
+</body>
+
+</html>
